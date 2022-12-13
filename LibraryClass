@@ -1,0 +1,117 @@
+import java.util.*;
+/**
+ * Library 클래스  
+ * 
+ * @author (2018225134 태정수, 2019315002 이민구, 2019315028 유동호, 2019603035 현유림) 
+ * @version (과제#3_ver.1)
+ */
+public class Library
+{
+    private String name;
+    public TreeSet<Book> ownedBook;
+    public HashSet<Borrower> libraryUser;
+    public LinkedList<Loan> loan;
+    
+    public Library(String name){
+        this.name = name;
+        libraryUser = new HashSet<Borrower>();
+        ownedBook = new TreeSet<Book>();
+        loan = new LinkedList<Loan>();
+    }
+    
+    public void registerOneBorrower(String name){
+        Borrower borrwer = new Borrower(name);
+        if(Borrower.contains(borrower) == true){
+            System.out.println("동일한 이름의 사용자가 있습니다.");
+            borrower = null;
+        }
+        else{
+            libraryUser.add(borrower);
+        }
+    }
+    
+    public void registerOneBook(String title, String author){
+        Book book = new Book(title, author);
+        if(Book.contains(book) == true){
+            System.out.println("동일한 책이 있습니다.");
+            book = null;
+        }
+        else{
+            int catalogueNumber = Book.Size() + 1;
+            Book book = new Book(title, author, catalogueNumber);
+            ownedBook.add(book);
+        }
+    }
+    
+    public String displayBookAvailableForLoan() {
+        String result = "";
+        Iterator<Book> iterBooks = ownedBook.iterator();
+        while(iterBooks.hasNext()){
+            Book forLoan = (Book)iterBooks.next();
+            if(forLoan.checkLoan() == false){
+                result += forLoan.toString();
+            }
+        }
+        return result;
+    }
+    
+    public String displayBookOnLoan() {
+        String result = "";
+        Iterator<Book> iterBooks = ownedBook.iterator();
+        while(iterBooks.hasNext()){
+            Book forLoan = (Box)iterBooks.next();
+            if(forLoan.checkLoan() == true){
+                result += forLoan.toString();
+            }
+        }
+        return result;
+    }
+    
+    public String lendOneBook(String name, String title, String author){
+        Borrower borrower = getBorrower(name);
+        Book book = getBook(title, author);
+        
+        Borrower findBorrower = checkBorrower(borrower);
+        Book findBook = checkBook(book);
+        if(findBorrower == false && findBook == false){
+            Loan loans = new Loan();
+            borrower.attachLoan(loans);
+            book.attachLoan(loans);
+            loan.add(loans);
+            return "대출이 정상적으로 되었습니다.";
+        }
+        return "대출을 실패하였습니다.";
+    }
+    
+    public String returnOneBook(String title, String author){
+        Book book = getBook(title, author);
+        
+        Borrower findBorrower = checkBorrower(borrower);
+        Book findBook = checkBook(book);
+        borrower.detachLoan();
+    }
+    
+    public int getBook(String title, String author) {
+        Iterator<Book>iterBook = (Book)iterBook.next();
+        Book book = null;
+        while(iterBook.hasNext()){
+            Book nextBook = (Book)iterBook.next();
+            if(nextBook.getTitle().equals(title) && nextBook.getAuthor().equals(author)){
+                book = nextBook().Size();
+            }
+        }
+        return book;
+    }
+    
+    public Borrower getBorrower(String name){
+        Iterator<Borrower>iterBorrower = libraryUser.iterator();
+        Borrower borrower = null;
+        while(iterBorrower.hasNext()){
+            Borrower nextBorrower = (Borrower)iterBorrower.next();
+            if(nextBorrower.getName().equals(name)) {
+                borrower = nextBorrower;
+            }
+        }
+        return borrower;
+    }
+}
