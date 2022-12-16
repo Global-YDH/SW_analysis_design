@@ -12,4 +12,4 @@ https://online.visual-paradigm.com/share.jsp?id=323137343037332d38 (대출중)
 
 https://online.visual-paradigm.com/share.jsp?id=323136373432392d3138#diagram:workspace=oawmirce&proj=0&id=18 (클래스)
 
-https://online.visual-paradigm.com/community/share/untitled-16wjrrdz7d (클래스 버전2)
+https://online.visual-paradigm.com/share.jsp?id=323137343037332d39 (클래스 버전2)
