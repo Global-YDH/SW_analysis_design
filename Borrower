@@ -4,12 +4,14 @@ import java.util.*;
  * 
  * @author (2018225134 태정수, 2019315002 이민구, 
  *          2019315028 유동호, 2019603035 현유림)
- * @version (과제#3)
+ * @version (Final)
  */
 public class Borrower
 {
-    private String name; 
+    private String name;
+    
     private Loan loan = null;
+    
     public Borrower(String name){
         this.name = name;
     }
@@ -18,11 +20,12 @@ public class Borrower
         return this.name;
     }
     
-    public void attachLoan(Loan loan){
-        loan.attachBorrower(this); //대출 객체에 해당 이용자를 배당
+    public void attachLoan(Borrower borrower){
+        loan.attachBorrower(this);
+        this.loan = loan;
     }    
 
-    public void detachLoan(Loan loan){
+    public void detachLoan(Borrower borrower){
         loan.detachBorrower();//대출 객체에서 해당 이용자를 배당 해제
         this.loan = null;
     }
