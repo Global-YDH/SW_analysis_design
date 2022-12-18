@@ -1,28 +1,21 @@
 import java.util.*;
+import java.text.*;
 /**
- * Loan 클래스
+ *
  * 
- * @author (2018225134 태정수, 2019315002 이민구, 
- *          2019315028 유동호, 2019603035 현유림) 
- * @version (과제#3)
+ * @author (2018225134 ㅌㅐ, 2019315002 ㄱㅜ, 2019315028 ㅇㅠ, 2019603035 ㅎㅕㄴ) 
+ * @version (ㄱㅗㅏㅈㅔ#3)
  */
-public class Loan extends LinkedList
+public class Loan
 {
+    private String loanDate;
+    private String returnDate;
     private Borrower borrower;
     private Book book;
-    private int catalogueNumber;
     
     public Loan(Borrower borrower, int catalogueNumber){
-        this.borrower=borrower;
-        this.catalogueNumber = catalogueNumber;
-    }
-    
-    public void add(Loan loan){
-        loan.add(loan);
-    }
-    
-    public void remove(Loan loan){
-        loan.remove(loan);
+        this.loanDate = setLendDate();
+        this.returnDate = setReturnDate();
     }
 
     public void attachBook(Book book){
@@ -32,12 +25,46 @@ public class Loan extends LinkedList
     public void attachBorrower(Borrower borrower){
         this.borrower = borrower;
     }
-
+    
     public void detachBook() {
         this.book = null;
     }
 
     public void detachBorrower() {
         this.borrower = null;
+    }
+    
+    public boolean checkLoan(Borrower borrower, int catalogueNumber){
+        return true;
+    }
+    
+    public Book getBook(){
+        return this.book;
+    }
+    
+    public Borrower getBorrower(){
+        return this.borrower;
+    }
+    
+    public String setReturnDate(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, +14);
+        // 도서의 대출 기간을 14일로 설정
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
+        //날짜 포맷 설정
+        Date time = calendar.getTime();
+        String returnDate = format.format(time);
+        return returnDate;
+    }
+
+    public String setLendDate(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date time = new Date();
+        String lendDate = format.format(time);
+        return lendDate;
+    }
+    
+    public String getReturnDate() {
+        return this.returnDate;
     }
 }
