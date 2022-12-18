@@ -4,25 +4,25 @@ import java.util.*;
  * 
  * @author (2018225134 태정수, 2019315002 이민구, 
  *          2019315028 유동호, 2019603035 현유림) 
- * @version (과제#3)
+ * @version (Final)
  */
 public class Book
 {
     private String title;
     private String author;
     private int catalogueNumber;
-    
+
     private Loan loan = null;
     public Book(String title, String author)
     {
         this.title = title;
         this.author = author;
     }
-    
+
     public String getTitle(){
         return this.title;
     }
-    
+
     public String getAuthor(){
         return this.author;
     }
@@ -40,21 +40,26 @@ public class Book
         loan.attachBook(this);
         this.loan = loan;
     }
-    
-    public void detachLoan(Loan loan){
+
+    public void detachLoan(Book book){
         loan.detachBook();
         this.loan = null;
     }
-    
+
     public void setCatalogueNumber(int catalogueNumber){
         this.catalogueNumber = catalogueNumber;
     }
-    
+
     public int getCatalogueNumber(String title, String author){
         return this.catalogueNumber;
     }
-    
-        public int getCatalogueNumber(){
+
+    public int getCatalogueNumber(){
         return this.catalogueNumber;
     }
+    
+    public String toString(){
+        return "제목: " + this.title + "저자: "+ this.author + "카탈로그 번호: " 
+        +this.catalogueNumber +"\n";
+     }
 }
