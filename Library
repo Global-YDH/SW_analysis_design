@@ -4,7 +4,7 @@ import java.util.*;
  * 
  * @author (2018225134 태정수, 2019315002 이민구, 
  *          2019315028 유동호, 2019603035 현유림) 
- * @version (과제#3)
+ * @version (Final)
  */
 public class Library
 {
@@ -47,18 +47,16 @@ public class Library
         }
     }
     
-    
     public String lendOneBook(String name, String title, String author){
         Borrower borrower = getBorrower(name);
         int catalogueNumber = getCatalogueNumber(title, author);
         Book book = getBook(catalogueNumber);
         boolean checkedBorrower = checkBorrower(borrower);
-        boolean checkedBook = checkBookLoan(book);
-        
+        boolean checkedBook = checkBookOnLoan(book);
         if(checkedBorrower == true && checkedBook == true){
-            Loan loan = new Loan(borrower, catalogueNumber);
-            loan.attachBorrower(borrower);
-            borrower.attachLoan(loan);
+            Loan loan = new Loan(borrower, book);
+            borrower.attachLoan(borrower);
+            book.attachLoan(book);
             system.add(loan);
             return "대출이 완료되었습니다";
         }
@@ -78,13 +76,13 @@ public class Library
         int catalogueNumber = getCatalogueNumber(title, author);
         Book book = getBook(catalogueNumber);
         boolean checkedBorrower = checkBorrower(borrower);
-        boolean checkedBook = checkBookLoan(book);
-        Loan checkedLoan = checkLoan(book, borrower);
-        system.remove(checkedLoan);
-        borrower.detachLoan(checkedLoan);
-        book.detachLoan(checkedLoan);
-        checkedLoan.detachBorrower();
-        checkedLoan.detachBook();
+        boolean checkedBook = checkBookOnLoan(book);
+        Loan loan = checkLoan(book, borrower);
+        system.remove(loan);
+        borrower.detachLoan(borrower);
+        book.detachLoan(book);
+        loan.detachBorrower();
+        loan.detachBook();
         return "반납이 완료되었습니다";
     }
     
@@ -145,7 +143,7 @@ public class Library
         }
     }
     
-    public boolean checkBookLoan(Book book){
+    public boolean checkBookOnLoan(Book book){
         if(book.checkLoan() == true){
             return false;
         }
