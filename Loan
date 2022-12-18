@@ -1,0 +1,43 @@
+import java.util.*;
+/**
+ * Loan 클래스
+ * 
+ * @author (2018225134 태정수, 2019315002 이민구, 
+ *          2019315028 유동호, 2019603035 현유림) 
+ * @version (과제#3)
+ */
+public class Loan extends LinkedList
+{
+    private Borrower borrower;
+    private Book book;
+    private int catalogueNumber;
+    
+    public Loan(Borrower borrower, int catalogueNumber){
+        this.borrower=borrower;
+        this.catalogueNumber = catalogueNumber;
+    }
+    
+    public void add(Loan loan){
+        loan.add(loan);
+    }
+    
+    public void remove(Loan loan){
+        loan.remove(loan);
+    }
+
+    public void attachBook(Book book){
+        this.book = book;
+    }
+
+    public void attachBorrower(Borrower borrower){
+        this.borrower = borrower;
+    }
+
+    public void detachBook() {
+        this.book = null;
+    }
+
+    public void detachBorrower() {
+        this.borrower = null;
+    }
+}
